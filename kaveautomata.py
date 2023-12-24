@@ -9,16 +9,16 @@ def addItem(name, price):
 def addExtra(name, price):
     extras.append([name, price])
 
+addItem("kávé", 150)
+addItem("tea", 200)
+addItem("forró csoki", 300)
+
+addExtra("tej", 50)
+addExtra("tejszín", 100)
+addExtra("cukor", 50)
+addExtra("citrom", 100)
+
 def main():
-    addItem("kávé", 150)
-    addItem("tea", 200)
-    addItem("forró csoki", 300)
-
-    addExtra("tej", 50)
-    addExtra("tejszín", 100)
-    addExtra("cukor", 50)
-    addExtra("citrom", 100)
-
     allowedItems = []
 
     for i in range(len(items)):
