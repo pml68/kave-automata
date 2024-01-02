@@ -88,11 +88,7 @@ def main():
     amount = items[itemChoice][1] + extras[extraChoice][1]
     amountPaid = 0
     coinChoice = 0
-    tens = 0
-    twenties = 0
-    fifties = 0
-    hundreds = 0
-    twoHundreds = 0
+    changeCoins = [0 for _ in range(5)]
 
     print(f'\nA fizetendő összeg {amount}Ft.')
 
@@ -113,21 +109,21 @@ def main():
                 print('Kifizetted a teljes összeget. Nincs visszajáró. Köszönjük a vásárlást!')
             else:
                 while change >= 200:
-                    twoHundreds += 1
+                    changeCoins[0] += 1
                     change -= 200
                 while change >= 100:
-                    hundreds += 1
+                    changeCoins[1] += 1
                     change -= 100
                 while change >= 50:
-                    fifties += 1
+                    changeCoins[2] += 1
                     change -= 50
                 while change >= 20:
-                    twenties += 1
+                    changeCoins[3] += 1
                     change -= 20
                 while change >= 10:
-                    tens += 1
+                    changeCoins[4] += 1
                     change -= 10
-                print(f'Kifizetted a teljes összeget. A visszajáród {twoHundreds}x200Ft, {hundreds}x100Ft, {fifties}x50Ft, {twenties}x20Ft és {tens}x10Ft.')
+                print(f'Kifizetted a teljes összeget. A visszajáród {changeCoins[0]}x200Ft, {changeCoins[1]}x100Ft, {changeCoins[2]}x50Ft, {changeCoins[3]}x20Ft és {changeCoins[4]}x10Ft.')
 
 if __name__ == "__main__":
     choice = input('Üdvözöllek. Vásárolsz vagy kilépsz? (v VAGY k) ').lower()
