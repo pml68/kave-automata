@@ -1,7 +1,4 @@
 #!/bin/python
-items = []
-extras = []
-coins = [200, 100, 50, 20, 10]
 
 def addItem(name, price):
     items.append([name, price])
@@ -9,16 +6,7 @@ def addItem(name, price):
 def addExtra(name, price):
     extras.append([name, price])
 
-addItem("kávé", 150)
-addItem("tea", 200)
-addItem("forró csoki", 300)
-
-addExtra("tej", 50)
-addExtra("tejszín", 100)
-addExtra("cukor", 50)
-addExtra("citrom", 100)
-
-def main():
+def main(items, extras, coins):
     allowedItems = []
 
     for i in range(len(items)):
@@ -108,25 +96,26 @@ def main():
             if change == 0:
                 print('Kifizetted a teljes összeget. Nincs visszajáró. Köszönjük a vásárlást!')
             else:
-                while change >= 200:
-                    changeCoins[0] += 1
-                    change -= 200
-                while change >= 100:
-                    changeCoins[1] += 1
-                    change -= 100
-                while change >= 50:
-                    changeCoins[2] += 1
-                    change -= 50
-                while change >= 20:
-                    changeCoins[3] += 1
-                    change -= 20
-                while change >= 10:
-                    changeCoins[4] += 1
-                    change -= 10
-                print(f'Kifizetted a teljes összeget. A visszajáród {changeCoins[0]}x200Ft, {changeCoins[1]}x100Ft, {changeCoins[2]}x50Ft, {changeCoins[3]}x20Ft és {changeCoins[4]}x10Ft.')
+                for i in coins:
+                    changeCoins[coins.index(i)] = change // i
+                    change = change % i
+                print(f'Kifizetted a teljes összeget. A visszajáród {changeCoins[0]}x{coins[0]}Ft, {changeCoins[1]}x{coins[1]}Ft, {changeCoins[2]}x{coins[2]}Ft, {changeCoins[3]}x{coins[3]}Ft és {changeCoins[4]}x{coins[4]}Ft.')
 
 if __name__ == "__main__":
     choice = input('Üdvözöllek. Vásárolsz vagy kilépsz? (v VAGY k) ').lower()
     while choice == 'v':
-        main()
+        items = []
+        extras = []
+        coins = [200, 100, 50, 20, 10]
+
+        addItem("kávé", 150)
+        addItem("tea", 200)
+        addItem("forró csoki", 300)
+
+        addExtra("tej", 50)
+        addExtra("tejszín", 100)
+        addExtra("cukor", 50)
+        addExtra("citrom", 100)
+
+        main(items, extras, coins)
         choice = input('Jó újra látni téged. Vásárolsz vagy kilépsz? (v VAGY k) ').lower()
