@@ -7,7 +7,12 @@ def addExtra(name, price):
     extras.append([name, price])
 
 class CoffeeMachine:
-    def main(self, items, extras, coins):
+    def __init__(self, items, extras, coins):
+        self.items = items
+        self.extras = extras
+        self.coins = coins
+
+    def main(self):
         allowedItems = []
 
         for i in range(len(items)):
@@ -82,12 +87,12 @@ class CoffeeMachine:
         print(f'\nA fizetendő összeg {amount}Ft.')
 
         print('A következő érmékkel fizethetsz:')
-        for i in coins:
+        for i in self.coins:
             print(f'{i}Ft ', end="")
         print('\n')
         while amount > amountPaid:
             coinChoice = int(input('"Dobj be egy érmét" '))
-            while coinChoice not in coins:
+            while coinChoice not in self.coins:
                 coinChoice = int(input('Ezt az érmét vagy nem fogadjuk el, vagy rossz formátumban írtad le. Kérlek, csak egy számot adj meg, pl. "200" ahelyett hogy "200Ft" '))
             amountPaid += coinChoice
             if amount > amountPaid:
@@ -97,10 +102,10 @@ class CoffeeMachine:
                 if change == 0:
                     print('Kifizetted a teljes összeget. Nincs visszajáró. Köszönjük a vásárlást!')
                 else:
-                    for i in coins:
-                        changeCoins[coins.index(i)] = change // i
+                    for i in self.coins:
+                        changeCoins[self.coins.index(i)] = change // i
                         change = change % i
-                    print(f'Kifizetted a teljes összeget. A visszajáród {changeCoins[0]}x{coins[0]}Ft, {changeCoins[1]}x{coins[1]}Ft, {changeCoins[2]}x{coins[2]}Ft, {changeCoins[3]}x{coins[3]}Ft és {changeCoins[4]}x{coins[4]}Ft.')
+                    print(f'Kifizetted a teljes összeget. A visszajáród {changeCoins[0]}x{self.coins[0]}Ft, {changeCoins[1]}x{self.coins[1]}Ft, {changeCoins[2]}x{self.coins[2]}Ft, {changeCoins[3]}x{self.coins[3]}Ft és {changeCoins[4]}x{self.coins[4]}Ft.')
 
 if __name__ == "__main__":
     choice = input('Üdvözöllek. Vásárolsz vagy kilépsz? (v VAGY k) ').lower()
@@ -118,7 +123,7 @@ if __name__ == "__main__":
         addExtra("cukor", 50)
         addExtra("citrom", 100)
 
-        app = CoffeeMachine()
-        app.main(items, extras, coins)
+        app = CoffeeMachine(items, extras, coins)
+        app.main()
 
         choice = input('Jó újra látni téged. Vásárolsz vagy kilépsz? (v VAGY k) ').lower()
